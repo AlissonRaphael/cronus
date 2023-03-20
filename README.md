@@ -1,5 +1,5 @@
 # Kronos
-[![GitHub](https://img.shields.io/github/license/AlissonRaphael/kronos)](https://github.com/AlissonRaphael/kronos/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/license/AlissonRaphael/cronus)](https://github.com/AlissonRaphael/cronus/blob/main/LICENSE)
 
 This repository contains the implementation of a time management tool as specified by the technique known as "promodore".
 
@@ -46,11 +46,11 @@ brew install node
 
 ### Clone
 
-Clone this repo to your local machine using `https://github.com/AlissonRaphael/kronos.git`
+Clone this repo to your local machine using `https://github.com/AlissonRaphael/cronus.git`
 
 ## Contact
 - Github: [alissonraphael](https://gist.github.com/AlissonRaphael)
 
 ## License
 
-[![GitHub](https://img.shields.io/github/license/AlissonRaphael/kronos)](https://github.com/AlissonRaphael/smart_search_algorithms/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/license/AlissonRaphael/cronus)](https://github.com/AlissonRaphael/cronus/blob/main/LICENSE)
