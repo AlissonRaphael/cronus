@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "cronus",
+    "slug": "cronus",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
