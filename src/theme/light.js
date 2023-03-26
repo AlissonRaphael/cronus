@@ -2,12 +2,11 @@ export default {
   Colors: {
     Background: '#ffffff',
 
+    Primary: '#ffffff',
     Primary300: '#f5f7fb',
     Primary600: '#b3b9be',
     Primary800: '#8a939a',
     Primary900: '#666971',
-    Primary1000: '#ffffff',
-
 
     Navigation: '#497db2',
 
