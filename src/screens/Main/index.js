@@ -1,4 +1,3 @@
-import { Text } from 'react-native'
 import { Screen, Layout, Header, MainContainer, Footer } from './styles'
 
 import Button from "../../components/Button"
