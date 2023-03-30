@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react'
 import { Container, Circle, Time, ExpectedTime } from './styles'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 
 dayjs.extend(duration)
 
+import { useTimer } from '../../Context/Timer'
+
 export default function Timer ({}) {
-  const formated = dayjs.duration(1500000).format('mm:ss')
+  const { item } = useTimer()
+
+  const formated = dayjs.duration(item).format('mm:ss')
 
   return (
     <Container>
