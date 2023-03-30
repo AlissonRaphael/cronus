@@ -1,8 +1,8 @@
 import { Container, Content } from './styles'
 
-export default function Button ({ children, onClick, color }) {
+export default function Button ({ children, onPress, color }) {
   return (
-    <Container onClick={onClick} color={color}>
+    <Container onPress={onPress} color={color}>
       <Content>{children}</Content>
     </Container>
   )

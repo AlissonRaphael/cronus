@@ -18,7 +18,7 @@ export default function Main () {
         </MainContainer>
 
         <Footer>
-          <Button>Iniciar</Button>
+          <Button onPress={() => setAction(actions.play)}>Iniciar</Button>
         </Footer>
       </Layout>
     </Screen>
