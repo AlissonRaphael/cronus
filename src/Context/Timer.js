@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useContext, useMemo, useEffect, useState } from "react"
 
 const DEFAULT_TIME = {
   durationTime: 1500000, // miliseconds
@@ -14,7 +14,7 @@ const ACTION = {
 
 const TimerContext = createContext()
 
-const useTimer = () => {
+const createTimer = () => {
   const [_durationTime, setDurationTime] = useState(DEFAULT_TIME.durationTime)
   const [_breakTime, setBreakTime] = useState(DEFAULT_TIME.breakTime)
   const [_action, setAction] = useState(ACTION.pause)
@@ -54,16 +54,18 @@ const useTimer = () => {
   }, [currentTime])
 }
 
-const TimerProvider = ({ children }) => {
+const TimerContext = createContext()
+
+export const TimerProvider = ({ children }) => {
   return (
-    <TimerContext.Provider>
+    <TimerContext.Provider value={createTimer}>
       {children}
     </TimerContext.Provider>
   )
 }
 
-
-export default {
-  TimerProvider,
+export const useTimer = () => {
+  const createTimer = useContext(TimerContext)
+  return createTimer()
   useTimer
 }
