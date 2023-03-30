@@ -1,57 +1,63 @@
 import { createContext, useContext, useMemo, useEffect, useState } from "react"
 
-const DEFAULT_TIME = {
-  durationTime: 1500000, // miliseconds
-  breakTime: 1500000 // miliseconds
+const TIMES = {
+  promodoro: 1500000, // miliseconds
+  break: 1500000 // miliseconds
 }
 
-const ACTION = {
+const ACTIONS = {
   play: 'play',
   pause: 'pause',
-  stop: 'stop',
-  break: 'break'
+  stop: 'stop'
 }
 
-const TimerContext = createContext()
+const STEPS = {
+  promodore: 'promodore',
+  break: 'break',
+  end: 'end',
+}
 
 const createTimer = () => {
-  const [_durationTime, setDurationTime] = useState(DEFAULT_TIME.durationTime)
-  const [_breakTime, setBreakTime] = useState(DEFAULT_TIME.breakTime)
-  const [_action, setAction] = useState(ACTION.pause)
+  const [promodoroTime, setPromodoroTime] = useState(TIMES.promodoro)
+  const [breakTime, setBreakTime] = useState(TIMES.break)
 
-  const [currentTime, setCurrentTime] = useState(0)
+  const [currentTime, setCurrentTime] = useState(promodoroTime)
 
-  useEffect(() => {
-    setCurrentTime(_durationTime)
-  }, [])
+  const [action, setAction] = useState(ACTIONS.stop)
+  const [step, setStep] = useState(STEPS.promodore)
 
   useEffect(() => {
     let interval;
 
-    if (_action === ACTION.play) {
-      interval = setInterval(() => { setTime((state) => state - 1000) }, 1000)
+    if (action === ACTIONS.play) {
+      interval = setInterval(() => { setCurrentTime((state) => state - 1000) }, 1000)
     }
 
-    if (_action === ACTION.pause) {
+    if (action === ACTIONS.pause) {
       clearInterval(interval)
     }
 
-    if (_action === ACTION.stop) {
+    if (action === ACTIONS.stop) {
       clearInterval(interval)
-      setTime(0)
+      setCurrentTime(promodoroTime)
     }
-
-    if (_action === ACTION.break) {
-      clearInterval(interval)
-      setTime(0)
-    }
-  }, [_action])
+  }, [action])
 
   useEffect(() => {
     if (currentTime <= 0) {
-      setAction(ACTION.break)
+      if (step === STEPS.promodore) setStep(STEPS.break) && setCurrentTime(breakTime)
+      if (step === STEPS.break) setStep(STEPS.promodore) && setAction(ACTIONS.stop)
     }
   }, [currentTime])
+
+  return {
+    time: currentTime,
+    actions: ACTIONS,
+    action,
+    setAction,
+    setPromodoroTime,
+    setBreakTime
+  }
 }
 
 const TimerContext = createContext()
@@ -67,5 +73,4 @@ export const TimerProvider = ({ children }) => {
 export const useTimer = () => {
   const createTimer = useContext(TimerContext)
   return createTimer()
-  useTimer
 }
