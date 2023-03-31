@@ -7,9 +7,9 @@ dayjs.extend(duration)
 import { useTimer } from '../../Context/Timer'
 
 export default function Timer ({}) {
-  const { item } = useTimer()
+  const { time } = useTimer()
 
-  const formated = dayjs.duration(item).format('mm:ss')
+  const formated = dayjs.duration(time).format('mm:ss')
 
   return (
     <Container>
