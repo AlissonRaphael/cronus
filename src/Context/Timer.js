@@ -5,14 +5,8 @@ const TIMES = {
   break: 1500000 // miliseconds
 }
 
-const ACTIONS = {
-  play: 'play',
-  pause: 'pause',
-  stop: 'stop'
-}
-
 const STEPS = {
-  promodore: 'promodore',
+  promodoro: 'promodoro',
   break: 'break',
   end: 'end',
 }
@@ -22,41 +16,37 @@ const createTimer = () => {
   const [breakTime, setBreakTime] = useState(TIMES.break)
 
   const [currentTime, setCurrentTime] = useState(promodoroTime)
+  const [step, setStep] = useState(STEPS.promodoro)
 
-  const [action, setAction] = useState(ACTIONS.stop)
-  const [step, setStep] = useState(STEPS.promodore)
+  let interval;
 
-  useEffect(() => {
-    let interval;
+  const handlePlay = () => {
+    interval = setInterval(() => { setCurrentTime((state) => state - 1000) }, 1000)
+  }
 
-    if (action === ACTIONS.play) {
-      interval = setInterval(() => { setCurrentTime((state) => state - 1000) }, 1000)
-    }
+  const handlePause = () => {
+    clearInterval(interval)
+  }
 
-    if (action === ACTIONS.pause) {
-      clearInterval(interval)
-    }
-
-    if (action === ACTIONS.stop) {
-      clearInterval(interval)
-      setCurrentTime(promodoroTime)
-    }
-  }, [action])
+  const handleStop = () => {
+    clearInterval(interval)
+    setCurrentTime(promodoroTime)
+  }
 
   useEffect(() => {
     if (currentTime <= 0) {
-      if (step === STEPS.promodore) setStep(STEPS.break) && setCurrentTime(breakTime)
-      if (step === STEPS.break) setStep(STEPS.promodore) && setAction(ACTIONS.stop)
+      if (step === STEPS.promodoro) setStep(STEPS.break) && setCurrentTime(breakTime)
+      if (step === STEPS.break) setStep(STEPS.promodoro) && handleStop()
     }
   }, [currentTime])
 
   return {
     time: currentTime,
-    actions: ACTIONS,
-    action,
-    setAction,
     setPromodoroTime,
-    setBreakTime
+    setBreakTime,
+    handlePlay,
+    handlePause,
+    handleStop
   }
 }
 
@@ -71,6 +61,6 @@ export const TimerProvider = ({ children }) => {
 }
 
 export const useTimer = () => {
-  const createTimer = useContext(TimerContext)
-  return createTimer()
+  const createTimer = useContext(TimerContext)()
+  return createTimer
 }

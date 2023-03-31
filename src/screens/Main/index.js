@@ -7,7 +7,7 @@ import Timer from '../../components/Timer';
 import { useTimer } from '../../Context/Timer'
 
 export default function Main () {
-  const { setAction, actions, action } = useTimer()
+  const { handlePlay, handlePause, handleStop } = useTimer()
 
   return (
     <Screen>
@@ -21,8 +21,8 @@ export default function Main () {
         </MainContainer>
 
         <Footer>
-          <Button onPress={() => setAction(actions.play)}>Iniciar</Button>
-          <Button onPress={() => setAction(actions.stop)}>Parar</Button>
+          <Button onPress={() => handlePlay()}>Iniciar</Button>
+          <Button onPress={() => handleStop()}>Parar</Button>
         </Footer>
       </Layout>
     </Screen>
