@@ -1,7 +1,9 @@
 import styled from "styled-components/native"
 import { Ionicons } from '@expo/vector-icons'
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled.TouchableOpacity.attrs((props) => ({
+  activeOpacity: 0.5
+}))`
   align-items: center;
   justify-content: center;
   padding: 16px;
