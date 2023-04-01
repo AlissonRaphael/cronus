@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useEffect, useState } from "react"
+import { createContext, useContext, useState } from "react"
 
 const TIMES = {
   promodoro: 1500000, // miliseconds
@@ -11,56 +11,62 @@ const STEPS = {
   end: 'end',
 }
 
-const createTimer = () => {
-  const [promodoroTime, setPromodoroTime] = useState(TIMES.promodoro)
-  const [breakTime, setBreakTime] = useState(TIMES.break)
-
-  const [currentTime, setCurrentTime] = useState(promodoroTime)
-  const [step, setStep] = useState(STEPS.promodoro)
-
-  let interval;
-
-  const handlePlay = () => {
-    interval = setInterval(() => { setCurrentTime((state) => state - 1000) }, 1000)
-  }
-
-  const handlePause = () => {
-    clearInterval(interval)
-  }
-
-  const handleStop = () => {
-    clearInterval(interval)
-    setCurrentTime(promodoroTime)
-  }
-
-  useEffect(() => {
-    if (currentTime <= 0) {
-      if (step === STEPS.promodoro) setStep(STEPS.break) && setCurrentTime(breakTime)
-      if (step === STEPS.break) setStep(STEPS.promodoro) && handleStop()
-    }
-  }, [currentTime])
-
-  return {
-    time: currentTime,
-    setPromodoroTime,
-    setBreakTime,
-    handlePlay,
-    handlePause,
-    handleStop
-  }
-}
-
 const TimerContext = createContext()
 
 export const TimerProvider = ({ children }) => {
+  const [promodoroTime, setPromodoroTime] = useState(TIMES.promodoro)
+  const [breakTime, setBreakTime] = useState(TIMES.break)
+
+  const [step, setStep] = useState(STEPS.promodoro)
+
+  const [customInterval, setCustomInterval] = useState()
+  const [time, setTime] = useState(promodoroTime)
+
+  const play = () => {
+    setCustomInterval(setInterval(() => {
+      setTime(state => {
+        if (state <= 0 && step === STEPS.break) {
+          setStep(STEPS.end)
+          setTime(promodoroTime)
+        }
+
+        if (state <= 0 && step === STEPS.promodoro) {
+          setStep(STEPS.break)
+          setTime(breakTime-1000)
+          stop()
+        }
+
+        return state - 1000
+      })
+
+    }, 1000))
+  }
+
+  const pause = () => {
+    clearInterval(customInterval)
+  }
+
+  const stop = () => {
+    clearInterval(customInterval)
+    setTime(promodoroTime)
+  }
+
+  const controls = () => {
+    return {
+      time, play, pause, stop,
+      setPromodoroTime,
+      setBreakTime,
+    }
+  }
+
   return (
-    <TimerContext.Provider value={createTimer}>
+    <TimerContext.Provider value={controls()}>
       {children}
     </TimerContext.Provider>
   )
 }
 
 export const useTimer = () => {
-  const createTimer = useContext(TimerContext)()
+  const createTimer = useContext(TimerContext)
   return createTimer
 }
