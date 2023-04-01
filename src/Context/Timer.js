@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 const TIMES = {
   promodoro: 1500000, // miliseconds
@@ -22,23 +22,22 @@ export const TimerProvider = ({ children }) => {
   const [customInterval, setCustomInterval] = useState()
   const [time, setTime] = useState(promodoroTime)
 
+  useEffect(() => {
+    if (time <= 0 && step === STEPS.promodoro) {
+      setStep(STEPS.break)
+      setTime(breakTime-1000)
+    }
+
+    if (time <= 0 && step === STEPS.break) {
+      setStep(STEPS.promodoro)
+      setTime(promodoroTime)
+      stop()
+    }
+  }, [time])
+
   const play = () => {
     setCustomInterval(setInterval(() => {
-      setTime(state => {
-        if (state <= 0 && step === STEPS.break) {
-          setStep(STEPS.end)
-          setTime(promodoroTime)
-        }
-
-        if (state <= 0 && step === STEPS.promodoro) {
-          setStep(STEPS.break)
-          setTime(breakTime-1000)
-          stop()
-        }
-
-        return state - 1000
-      })
-
+      setTime(state => state - 1000)
     }, 1000))
   }
 
