@@ -8,7 +8,7 @@ export const Container = styled.TouchableOpacity`
   border-radius: 24px;
   width: 100%;
 
-  background-color: ${({ theme }) => theme.Colors.Navigation};
+  background-color: ${({ theme, color }) => color || theme.Colors.Navigation};
 `
 
 export const Content = styled.Text`
