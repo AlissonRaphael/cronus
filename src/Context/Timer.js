@@ -11,12 +11,19 @@ const STEPS = {
   end: 'end',
 }
 
+const ACTIONS = {
+  play: 'play',
+  pause: 'pause',
+  stop: 'stop'
+}
+
 const TimerContext = createContext()
 
 export const TimerProvider = ({ children }) => {
   const [promodoroTime, setPromodoroTime] = useState(TIMES.promodoro)
   const [breakTime, setBreakTime] = useState(TIMES.break)
 
+  const [action, setAction] = useState(ACTIONS.stop)
   const [step, setStep] = useState(STEPS.promodoro)
 
   const [customInterval, setCustomInterval] = useState()
@@ -36,25 +43,34 @@ export const TimerProvider = ({ children }) => {
   }, [time])
 
   const play = () => {
-    setCustomInterval(setInterval(() => {
-      setTime(state => state - 1000)
-    }, 1000))
+    if (action !== ACTIONS.play) {
+      setAction(ACTIONS.play)
+      setCustomInterval(setInterval(() => {
+        setTime(state => state - 1000)
+      }, 1000))
+    }
   }
 
   const pause = () => {
-    clearInterval(customInterval)
+    if (action !== ACTIONS.pause) {
+      setAction(ACTIONS.pause)
+      clearInterval(customInterval)
+    }
   }
 
   const stop = () => {
-    clearInterval(customInterval)
-    setTime(promodoroTime)
+    if (action !== ACTIONS.stop) {
+      setAction(ACTIONS.stop)
+      clearInterval(customInterval)
+      setTime(promodoroTime)
+    }
   }
 
   const controls = () => {
     return {
-      time, play, pause, stop,
-      setPromodoroTime,
-      setBreakTime,
+      time, play, pause, stop, step,
+      setPromodoroTime, promodoroTime,
+      setBreakTime, breakTime
     }
   }
 
