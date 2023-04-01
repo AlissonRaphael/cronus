@@ -1,11 +1,10 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Animated } from 'react-native';
 import styled from "styled-components/native"
 
 const { StatusBarManager: { HEIGHT: StatusBarHeight } } = NativeModules
 
-export const Screen = styled.View`
+export const Screen = styled(Animated.View)`
   flex: 1;
-  background-color: ${({ theme }) => theme.Colors.Background};
 `
 
 export const Layout = styled.View`
