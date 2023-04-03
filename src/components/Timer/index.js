@@ -1,13 +1,17 @@
-import { Container, Circle, Time, ExpectedTime } from './styles'
+import { useMemo } from 'react'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 
-dayjs.extend(duration)
-
+import { Container, Circle, Time, ExpectedTime } from './styles'
 import { useTimer } from '../../Context/Timer'
 
+dayjs.extend(duration)
+
 export default function Timer ({}) {
-  const { time } = useTimer()
+  const { time, promodoroTime, breakTime } = useTimer()
+
+  const pTimer = useMemo(() => dayjs.duration(promodoroTime).format('mm'), [promodoroTime])
+  const bTimer = useMemo(() => dayjs.duration(breakTime).format('mm'), [breakTime])
 
   const formated = dayjs.duration(time).format('mm:ss')
 
@@ -18,7 +22,7 @@ export default function Timer ({}) {
           {formated}
         </Time>
       </Circle>
-      <ExpectedTime>25m / 05m</ExpectedTime>
+      <ExpectedTime>{pTimer}m / {bTimer}m</ExpectedTime>
     </Container>
   )
 }

@@ -10,7 +10,7 @@ export const Circle = styled.View`
   width: 250px;
   height: 250px;
   border-radius: 125px;
-  background-color: ${({ theme, color }) => color || theme.Colors.Card4};
+  background-color: rgba(0,0,0,0.1);
 
   align-items: center;
   justify-content: center;
@@ -24,6 +24,6 @@ export const Time = styled.Text`
 
 export const ExpectedTime = styled.Text`
   margin-top: 10px;
-  color: ${({ theme, color }) => color || theme.Colors.Primary600};
+  color: ${({ theme, color }) => color || theme.Colors.Primary};
   font-size: 16px;
 `
