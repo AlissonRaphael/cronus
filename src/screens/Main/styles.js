@@ -28,6 +28,7 @@ export const MainContainer = styled.View`
 
 export const Footer = styled.View`
   width: 100%;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 `
