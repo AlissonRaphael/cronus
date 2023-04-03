@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 
 const TIMES = {
   promodoro: 1500000, // miliseconds
-  break: 1500000 // miliseconds
+  break: 300000 // miliseconds
 }
 
 const STEPS = {
@@ -60,15 +60,16 @@ export const TimerProvider = ({ children }) => {
 
   const stop = () => {
     if (action !== ACTIONS.stop) {
-      setAction(ACTIONS.stop)
       clearInterval(customInterval)
+      setAction(ACTIONS.stop)
       setTime(promodoroTime)
+      setStep(STEPS.promodoro)
     }
   }
 
   const controls = () => {
     return {
-      time, play, pause, stop, step,
+      time, play, pause, stop, step, action,
       setPromodoroTime, promodoroTime,
       setBreakTime, breakTime
     }
