@@ -1,6 +1,8 @@
 import styled from "styled-components/native"
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled.TouchableOpacity.attrs((props) => ({
+  activeOpacity: 0.6
+}))`
   align-items: center;
   justify-content: center;
   padding: 18px;
