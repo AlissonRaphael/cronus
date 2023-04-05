@@ -6,7 +6,7 @@ import { Layout, Header, MainContainer, Footer } from './styles'
 import IconButton from '../../components/IconButton'
 import Timer from '../../components/Timer'
 
-import { useTimer } from '../../Context/Timer'
+import { useTimer } from '../../context/Timer'
 
 export default function Main ({ navigation }) {
   const { play, pause, stop, step, promodoroTime, breakTime, time, action } = useTimer()

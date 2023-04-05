@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 
 import { Container, Circle, Time, ExpectedTime } from './styles'
-import { useTimer } from '../../Context/Timer'
+import { useTimer } from '../../context/Timer'
 
 dayjs.extend(duration)
 
