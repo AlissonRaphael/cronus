@@ -8,7 +8,7 @@ import Timer from '../../components/Timer'
 
 import { useTimer } from '../../Context/Timer'
 
-export default function Main () {
+export default function Main ({ navigation }) {
   const { play, pause, stop, step, promodoroTime, breakTime, time, action } = useTimer()
 
   const interpolateTime = useMemo(() => step === 'promodoro' ? promodoroTime : breakTime, [step, promodoroTime, breakTime])
@@ -30,7 +30,7 @@ export default function Main () {
       <Layout>
         <Header>
           <IconButton name="add" {...PROPS} />
-          <IconButton name="ios-settings-sharp" {...PROPS} />
+          <IconButton name="ios-settings-sharp" {...PROPS} onPress={() => navigation.navigate('Option')} />
         </Header>
         <MainContainer>
           <Timer/>
