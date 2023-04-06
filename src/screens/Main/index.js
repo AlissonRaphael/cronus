@@ -30,7 +30,7 @@ export default function Main ({ navigation }) {
       <Layout>
         <Header>
           <IconButton name="add" {...PROPS} />
-          <IconButton name="ios-settings-sharp" {...PROPS} onPress={() => navigation.navigate('Option')} />
+          <IconButton name="ios-settings-sharp" {...PROPS} onPress={() => navigation.navigate('Options')} />
         </Header>
         <MainContainer>
           <Timer/>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Screen, Layout, Header, Title, Main, Label } from './styles';
 import Slider from '../../components/Slider';
 
-export default function Option() {
+export default function Options () {
   const [promodoroTime, setPromodoreTime] = useState()
 
   return <Screen>

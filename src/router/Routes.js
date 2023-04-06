@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import MainScreen from '../screens/Main';
-import OptionScreen from '../screens/Option';
+import OptionsScreen from '../screens/Options';
 
 const Stack = createNativeStackNavigator()
 
@@ -22,8 +22,8 @@ export default function Routes() {
           options={{
             headerShown: false,
           }}
-          name="Option"
-          component={OptionScreen}
+          name="Options"
+          component={OptionsScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
