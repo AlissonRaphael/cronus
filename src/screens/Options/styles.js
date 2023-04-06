@@ -22,6 +22,7 @@ export const Header = styled.View`
 `
 
 export const Title = styled.Text`
+  margin-bottom: 6px;
   font-size: 28px;
   font-weight: bold;
   color: ${({ theme }) => theme.Colors.Primary};
@@ -33,6 +34,7 @@ export const Main = styled.View`
 `
 
 export const Label = styled.Text`
+  margin-top: 8px;
   font-size: 20px;
   font-weight: bold;
   color: ${({ theme }) => theme.Colors.Primary300};
