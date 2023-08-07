@@ -3,6 +3,11 @@
 
 This repository contains the implementation of a time management tool as specified by the technique known as "promodore".
 
+## Techs
+![GithubPages Badge](https://img.shields.io/badge/-Expo-000?style=flat-square&logo=expo&logoColor=white&color=000020&)
+![GithubPages Badge](https://img.shields.io/badge/-ReactNative-000?style=flat-square&logo=react&logoColor=black&color=61DAFB&)
+![GithubPages Badge](https://img.shields.io/badge/-StyledComponents-000?style=flat-square&logo=styledcomponents&logoColor=white&color=DB7093)
+![GithubPages Badge](https://img.shields.io/badge/-ReactIcons-000?style=flat-square&logo=createreactapp&logoColor=white&color=09D3AC)
 
 ## Contents
 - [Installation](#installation)
